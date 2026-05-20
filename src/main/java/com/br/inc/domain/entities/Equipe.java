@@ -1,9 +1,11 @@
 package com.br.inc.domain.entities;
 
-import com.br.inc.domain.exceptions.DomainException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+
+import com.br.inc.domain.exceptions.DomainException;
 
 /**
  * Representa uma equipe de trabalho composta por múltiplos usuários.
@@ -76,6 +78,29 @@ public class Equipe {
      * @param usuario Membro a ser removido.
      */
     public void removerMembro(Usuario usuario) {
+        if (!this.membros.contains(usuario)) {
+            throw new DomainException("Este usuário não é membro desta equipe.");
+        }
         this.membros.remove(usuario);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Equipe equipe = (Equipe) o;
+        if (this.id == null || equipe.id == null) {
+            return false;
+        }
+        return Objects.equals(id, equipe.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? Objects.hashCode(id) : System.identityHashCode(this);
     }
 }

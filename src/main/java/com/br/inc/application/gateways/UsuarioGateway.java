@@ -1,7 +1,9 @@
 package com.br.inc.application.gateways;
 
-import com.br.inc.domain.entities.Usuario;
+import java.util.List;
 import java.util.Optional;
+
+import com.br.inc.domain.entities.Usuario;
 
 /**
  * Interface de porta de saída para persistência e busca de usuários.
@@ -31,4 +33,18 @@ public interface UsuarioGateway {
      * @return Optional contendo o usuário se encontrado.
      */
     Optional<Usuario> buscarPorId(Long id);
+
+    /**
+     * Lista todos os usuários cadastrados.
+     *
+     * @return Lista de usuários.
+     */
+    List<Usuario> listarTodos();
+
+    /**
+     * Remove um usuário pelo ID.
+     *
+     * @param id Identificador do usuário.
+     */
+    void deletarPorId(Long id);
 }

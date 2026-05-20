@@ -35,6 +35,6 @@ public class AlocarMembroEquipeUseCase {
         equipe.adicionarMembro(usuario);
 
         Equipe equipeSalva = equipeGateway.salvar(equipe);
-        return EquipeResponseDTO.fromEntity(equipeSalva);
+        return EquipeResponseDTO.fromDomain(equipeSalva);
     }
 }

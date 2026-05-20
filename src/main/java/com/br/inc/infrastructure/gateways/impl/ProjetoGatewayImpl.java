@@ -1,12 +1,13 @@
 package com.br.inc.infrastructure.gateways.impl;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import com.br.inc.application.gateways.ProjetoGateway;
 import com.br.inc.domain.entities.Projeto;
 import com.br.inc.infrastructure.persistence.entities.ProjetoJpaEntity;
 import com.br.inc.infrastructure.persistence.repositories.ProjetoRepository;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class ProjetoGatewayImpl implements ProjetoGateway {
 
@@ -33,5 +34,10 @@ public class ProjetoGatewayImpl implements ProjetoGateway {
         return projetoRepository.findAll().stream()
                 .map(ProjetoJpaEntity::toDomain)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void deletarPorId(Long id) {
+        projetoRepository.deleteById(id);
     }
 }

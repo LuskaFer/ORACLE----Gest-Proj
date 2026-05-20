@@ -41,6 +41,6 @@ public class CriarUsuarioUseCase {
         );
 
         Usuario usuarioSalvo = usuarioGateway.salvar(novoUsuario);
-        return UsuarioResponseDTO.fromEntity(usuarioSalvo);
+        return UsuarioResponseDTO.fromDomain(usuarioSalvo);
     }
 }

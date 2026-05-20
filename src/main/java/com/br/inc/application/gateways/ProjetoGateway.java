@@ -1,8 +1,9 @@
 package com.br.inc.application.gateways;
 
-import com.br.inc.domain.entities.Projeto;
 import java.util.List;
 import java.util.Optional;
+
+import com.br.inc.domain.entities.Projeto;
 
 /**
  * Interface de porta de saída para operações de persistência de projetos.
@@ -14,4 +15,6 @@ public interface ProjetoGateway {
     Optional<Projeto> buscarPorId(Long id);
 
     List<Projeto> listarTodos();
+
+    void deletarPorId(Long id);
 }

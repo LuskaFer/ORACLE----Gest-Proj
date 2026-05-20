@@ -1,10 +1,13 @@
 package com.br.inc.infrastructure.gateways.impl;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import com.br.inc.application.gateways.UsuarioGateway;
 import com.br.inc.domain.entities.Usuario;
 import com.br.inc.infrastructure.persistence.entities.UsuarioJpaEntity;
 import com.br.inc.infrastructure.persistence.repositories.UsuarioRepository;
-import java.util.Optional;
 
 public class UsuarioGatewayImpl implements UsuarioGateway {
 
@@ -29,5 +32,17 @@ public class UsuarioGatewayImpl implements UsuarioGateway {
     @Override
     public Optional<Usuario> buscarPorId(Long id) {
         return usuarioRepository.findById(id).map(UsuarioJpaEntity::toDomain);
+    }
+
+    @Override
+    public List<Usuario> listarTodos() {
+        return usuarioRepository.findAll().stream()
+                .map(UsuarioJpaEntity::toDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void deletarPorId(Long id) {
+        usuarioRepository.deleteById(id);
     }
 }

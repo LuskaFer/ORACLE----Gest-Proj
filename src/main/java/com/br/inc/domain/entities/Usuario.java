@@ -1,5 +1,7 @@
 package com.br.inc.domain.entities;
 
+import java.util.Objects;
+
 import com.br.inc.domain.enums.PerfilUsuario;
 import com.br.inc.domain.exceptions.DomainException;
 
@@ -33,7 +35,7 @@ public class Usuario {
     public Usuario(String nomeCompleto, String cpf, String email, String cargo, String login, String senha, PerfilUsuario perfil) {
         validarCampos(nomeCompleto, cpf, email, login, senha, perfil);
         this.nomeCompleto = nomeCompleto;
-        this.cpf = cpf;
+        this.cpf = (cpf != null) ? cpf.replaceAll("\\D", "") : null;
         this.email = email;
         this.cargo = cargo;
         this.login = login;
@@ -100,6 +102,19 @@ public class Usuario {
     }
 
     /**
+     * Atualiza os dados do usuário validando as novas informações.
+     */
+    public void atualizarDados(String nomeCompleto, String email, String cargo, String login, String senha, PerfilUsuario perfil) {
+        validarCampos(nomeCompleto, this.cpf, email, login, senha, perfil);
+        this.nomeCompleto = nomeCompleto;
+        this.email = email;
+        this.cargo = cargo;
+        this.login = login;
+        this.senha = senha;
+        this.perfil = perfil;
+    }
+
+    /**
      * Atualiza o perfil do usuário caso possua permissão.
      *
      * @param novoPerfil O novo perfil a ser atribuído.
@@ -109,5 +124,25 @@ public class Usuario {
             throw new DomainException("Novo perfil não pode ser nulo.");
         }
         this.perfil = novoPerfil;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Usuario usuario = (Usuario) o;
+        if (this.id == null || usuario.id == null) {
+            return false;
+        }
+        return Objects.equals(id, usuario.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? Objects.hashCode(id) : System.identityHashCode(this);
     }
 }

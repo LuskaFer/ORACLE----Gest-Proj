@@ -25,6 +25,6 @@ public class CriarEquipeUseCase {
     public EquipeResponseDTO executar(EquipeRequestDTO dto) {
         Equipe equipe = new Equipe(dto.nome(), dto.descricao());
         Equipe equipeSalva = equipeGateway.salvar(equipe);
-        return EquipeResponseDTO.fromEntity(equipeSalva);
+        return EquipeResponseDTO.fromDomain(equipeSalva);
     }
 }

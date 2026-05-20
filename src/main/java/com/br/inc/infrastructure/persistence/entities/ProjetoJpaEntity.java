@@ -1,6 +1,8 @@
 package com.br.inc.infrastructure.persistence.entities;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.br.inc.domain.entities.Projeto;
 import com.br.inc.domain.enums.StatusProjeto;
@@ -14,6 +16,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -44,10 +48,18 @@ public class ProjetoJpaEntity {
     @JoinColumn(name = "gerente_id", nullable = false)
     private UsuarioJpaEntity gerente;
 
+    @ManyToMany
+    @JoinTable(
+            name = "projeto_equipes",
+            joinColumns = @JoinColumn(name = "projeto_id"),
+            inverseJoinColumns = @JoinColumn(name = "equipe_id")
+    )
+    private List<EquipeJpaEntity> equipes;
+
     public ProjetoJpaEntity() {
     }
 
-    public ProjetoJpaEntity(Long id, String nome, String descricao, LocalDate dataInicio, LocalDate dataTerminoPrevista, StatusProjeto status, UsuarioJpaEntity gerente) {
+    public ProjetoJpaEntity(Long id, String nome, String descricao, LocalDate dataInicio, LocalDate dataTerminoPrevista, StatusProjeto status, UsuarioJpaEntity gerente, List<EquipeJpaEntity> equipes) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
@@ -55,6 +67,7 @@ public class ProjetoJpaEntity {
         this.dataTerminoPrevista = dataTerminoPrevista;
         this.status = status;
         this.gerente = gerente;
+        this.equipes = equipes;
     }
 
     // Getters e Setters manuais
@@ -114,10 +127,21 @@ public class ProjetoJpaEntity {
         this.gerente = gerente;
     }
 
+    public List<EquipeJpaEntity> getEquipes() {
+        return equipes;
+    }
+
+    public void setEquipes(List<EquipeJpaEntity> equipes) {
+        this.equipes = equipes;
+    }
+
     public Projeto toDomain() {
         Projeto projeto = new Projeto(nome, descricao, dataInicio, dataTerminoPrevista, gerente.toDomain());
         projeto.setId(this.id);
         projeto.atualizarStatus(this.status);
+        if (equipes != null) {
+            equipes.forEach(e -> projeto.adicionarEquipe(e.toDomain()));
+        }
         return projeto;
     }
 
@@ -129,7 +153,10 @@ public class ProjetoJpaEntity {
                 projeto.getDataInicio(),
                 projeto.getDataTerminoPrevista(),
                 projeto.getStatus(),
-                UsuarioJpaEntity.fromDomain(projeto.getGerente())
+                UsuarioJpaEntity.fromDomain(projeto.getGerente()),
+                projeto.getEquipes().stream()
+                        .map(EquipeJpaEntity::fromDomain)
+                        .collect(Collectors.toList())
         );
     }
 }

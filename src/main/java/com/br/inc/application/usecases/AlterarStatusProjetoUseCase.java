@@ -30,6 +30,6 @@ public class AlterarStatusProjetoUseCase {
 
         projeto.atualizarStatus(novoStatus);
         Projeto projetoSalvo = projetoGateway.salvar(projeto);
-        return ProjetoResponseDTO.fromEntity(projetoSalvo);
+        return ProjetoResponseDTO.fromDomain(projetoSalvo);
     }
 }

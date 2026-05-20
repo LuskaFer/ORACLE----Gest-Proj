@@ -47,6 +47,6 @@ public class CriarProjetoUseCase {
         );
 
         Projeto projetoSalvo = projetoGateway.salvar(novoProjeto);
-        return ProjetoResponseDTO.fromEntity(projetoSalvo);
+        return ProjetoResponseDTO.fromDomain(projetoSalvo);
     }
 }
