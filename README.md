@@ -1,1 +1,41 @@
-Sistema de Gestão de Projetos e Equipes 🚀Um sistema robusto para otimizar o controle de projetos corporativos, garantindo a gestão eficaz de equipes, tarefas e o acompanhamento prático de entregas. Desenvolvido para resolver o desafio de alocação de profissionais (como desenvolvedores, analistas e designers) em múltiplas frentes de trabalho, visando o cumprimento de prazos contratuais e o melhor aproveitamento do corpo técnico.  🛠️ Stack e TecnologiasLinguagem: Java 25 LTS   Framework: Spring Boot 4.0.4Gerenciador de Dependências: Maven (pacote com.br.inc)Banco de Dados (Fase 1 - 100% Local): H2 Database (Persistido em arquivo)🏗️ Arquitetura e PadrõesO projeto foi estruturado com foco absoluto no isolamento das regras de negócio, facilidade de manutenção e escalabilidade, utilizando:Clean Architecture Estrita: Divisão clara do código em 4 camadas fundamentais (Domain, Application, Infrastructure, Presentation).Domain-Driven Design (DDD): Modelagem focada no domínio central, garantindo que as regras de negócio puras não tenham dependências de frameworks externos ou do banco de dados.Princípios POO (SOLID & Clean Code): Uso intenso de abstração, encapsulamento rigoroso do estado dos objetos e injeção de dependências.⚙️ Funcionalidades Principais (Core Domain)Gestão de Usuários: Cadastro de informações essenciais (nome, CPF, e-mail, cargo) e controle de perfis de acesso sistêmico (Administrador, Gerente ou Colaborador).  Gestão de Projetos: Acompanhamento do ciclo de vida com status definidos (Planejado, Em andamento, Concluído, Cancelado), controle de datas de entrega e atribuição direta de um gerente responsável.  Alocação de Equipes: Criação de times com múltiplos membros vinculados, arquitetado para permitir que uma mesma equipe atue de forma dinâmica em vários projetos simultâneos.  
+
+# Sistema de Gestão de Projetos e Equipes 🚀
+
+Um sistema robusto para otimizar o controle de projetos corporativos, garantindo a gestão eficaz de equipes, tarefas e o acompanhamento prático de entregas. Desenvolvido para resolver o desafio de alocação de profissionais (como desenvolvedores, analistas e designers) em múltiplas frentes de trabalho, visando o cumprimento de prazos contratuais e o melhor aproveitamento do corpo técnico.
+
+## 🛠️ Stack e Tecnologias
+
+* 
+**Linguagem:** Java 25 LTS 
+
+
+* **Framework:** Spring Boot 4.0.4
+* **Gerenciador de Dependências:** Maven (pacote `com.br.inc`)
+* **Banco de Dados (Fase 1 - 100% Local):** H2 Database (Persistido em arquivo)
+
+## 🏗️ Arquitetura e Padrões
+
+O projeto foi estruturado com foco absoluto no isolamento das regras de negócio, facilidade de manutenção e escalabilidade, utilizando:
+
+* **Clean Architecture Estrita:** Divisão clara do código em 4 camadas fundamentais (`Domain`, `Application`, `Infrastructure`, `Presentation`).
+* **Domain-Driven Design (DDD):** Modelagem focada no domínio central, garantindo que as regras de negócio puras não tenham dependências de frameworks externos ou do banco de dados.
+* **Princípios POO (SOLID & Clean Code):** Uso intenso de abstração, encapsulamento rigoroso do estado dos objetos e injeção de dependências.
+
+## ⚙️ Funcionalidades Principais (Core Domain)
+
+* 
+**Gestão de Usuários:** Cadastro de informações essenciais (nome, CPF, e-mail, cargo) e controle de perfis de acesso sistêmico (Administrador, Gerente ou Colaborador).
+
+
+* 
+**Gestão de Projetos:** Acompanhamento do ciclo de vida com status definidos (Planejado, Em andamento, Concluído, Cancelado), controle de datas de entrega e atribuição direta de um gerente responsável.
+
+
+* 
+**Alocação de Equipes:** Criação de times com múltiplos membros vinculados, arquitetado para permitir que uma mesma equipe atue de forma dinâmica em vários projetos simultâneos.
+
+
+
+---
+
+*Pronto para rodar localmente. Clone o repositório, instale as dependências via Maven e inicie a aplicação.*
