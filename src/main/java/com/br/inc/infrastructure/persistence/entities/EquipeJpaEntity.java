@@ -1,20 +1,22 @@
 package com.br.inc.infrastructure.persistence.entities;
 
-import com.br.inc.domain.entities.Equipe;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.br.inc.domain.entities.Equipe;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
+
 @Entity
 @Table(name = "equipes")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class EquipeJpaEntity {
 
     @Id
@@ -34,6 +36,16 @@ public class EquipeJpaEntity {
     )
     private List<UsuarioJpaEntity> membros;
 
+    public EquipeJpaEntity() {
+    }
+
+    public EquipeJpaEntity(Long id, String nome, String descricao, List<UsuarioJpaEntity> membros) {
+        this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.membros = membros;
+    }
+
     public Equipe toDomain() {
         Equipe equipe = new Equipe(nome, descricao);
         equipe.setId(this.id);
@@ -41,6 +53,38 @@ public class EquipeJpaEntity {
             membros.forEach(m -> equipe.adicionarMembro(m.toDomain()));
         }
         return equipe;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public List<UsuarioJpaEntity> getMembros() {
+        return membros;
+    }
+
+    public void setMembros(List<UsuarioJpaEntity> membros) {
+        this.membros = membros;
     }
 
     public static EquipeJpaEntity fromDomain(Equipe equipe) {
